@@ -1,0 +1,29 @@
+{
+  "name": "lll-ogp-checker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "typecheck": "tsc --noEmit",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LLL-development/lll-ogp-checker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/LLL-development/lll-ogp-checker/issues"
+  },
+  "homepage": "https://github.com/LLL-development/lll-ogp-checker#readme",
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20260727.1",
+    "typescript": "^7.0.2",
+    "wrangler": "^4.114.0"
+  }
+}

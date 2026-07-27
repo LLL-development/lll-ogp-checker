@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>OGP Checker</title>
+<link rel="icon" type="image/svg+xml" href="/lllLogo.svg" />
+<link rel="stylesheet" href="/style.css" />
+<script>
+(function () {
+	try {
+		var theme = localStorage.getItem("ogp-theme");
+		if (theme === "light" || theme === "dark") {
+			document.documentElement.dataset.theme = theme;
+		}
+	} catch (e) {}
+})();
+</script>
+</head>
+<body>
+<main class="page">
+	<header class="header">
+		<div class="header-top">
+			<div class="brand">
+				<img src="/lllLogo.svg" alt="LLL" class="logo" />
+				<h1 id="app-title"></h1>
+			</div>
+			<div class="controls">
+				<div class="lang-switch" id="lang-switch">
+					<button type="button" data-lang="en">EN</button>
+					<button type="button" data-lang="ja">日本語</button>
+					<button type="button" data-lang="zh">简体中文</button>
+				</div>
+				<button type="button" id="theme-toggle" class="theme-toggle"></button>
+			</div>
+		</div>
+		<p id="app-description"></p>
+	</header>
+
+	<form id="check-form" class="check-form">
+		<input
+			id="url-input"
+			type="text"
+			inputmode="url"
+			autocomplete="off"
+			required
+		/>
+		<button type="submit" id="check-button"></button>
+	</form>
+
+	<p id="error" class="error" hidden></p>
+	<p id="loading" class="loading" hidden></p>
+
+	<section id="results" class="results" hidden>
+		<div id="cards" class="cards-grid"></div>
+
+		<div class="card-group">
+			<h2 id="raw-tags-heading"></h2>
+			<table id="raw-table" class="raw-table">
+				<tbody></tbody>
+			</table>
+		</div>
+	</section>
+</main>
+<script src="/i18n.js"></script>
+<script src="/app.js"></script>
+</body>
+</html>
