@@ -23,6 +23,8 @@ const manualSite = document.getElementById("manual-site");
 const manualImageUrl = document.getElementById("manual-image-url");
 const manualImageFile = document.getElementById("manual-image-file");
 const manualButton = document.getElementById("manual-button");
+const fileChooseButton = document.getElementById("file-choose-button");
+const fileNameDisplay = document.getElementById("file-name-display");
 
 const THEME_STORAGE_KEY = "ogp-theme";
 let lastData = null;
@@ -293,8 +295,14 @@ function applyStaticText() {
 	document.getElementById("manual-image-url-label").textContent = I18N.t("manualImageUrlLabel");
 	document.getElementById("manual-image-file-label").textContent = I18N.t("manualImageFileLabel");
 	manualButton.textContent = I18N.t("manualButton");
+	fileChooseButton.textContent = I18N.t("chooseFileButton");
+	fileNameDisplay.textContent = manualImageFile.files[0] ? manualImageFile.files[0].name : I18N.t("noFileChosen");
 	if (lastData) renderResult(lastData);
 }
+
+manualImageFile.addEventListener("change", () => {
+	fileNameDisplay.textContent = manualImageFile.files[0] ? manualImageFile.files[0].name : I18N.t("noFileChosen");
+});
 
 function setActiveTab(tab) {
 	const isUrl = tab === "url";

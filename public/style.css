@@ -29,6 +29,7 @@
 
 /* Explicit user choice always wins over the system preference above. */
 html[data-theme="light"] {
+	color-scheme: light;
 	--bg: #f5f6f8;
 	--fg: #1a1a1a;
 	--muted: #65676b;
@@ -42,6 +43,7 @@ html[data-theme="light"] {
 }
 
 html[data-theme="dark"] {
+	color-scheme: dark;
 	--bg: #15181c;
 	--fg: #e8e9ea;
 	--muted: #9aa0a6;
@@ -222,8 +224,46 @@ html[data-theme="dark"] .header .logo {
 	resize: vertical;
 }
 
-.field input[type="file"] {
-	padding: 0.35rem 0.5rem;
+.file-input-hidden {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
+
+.file-input-row {
+	display: flex;
+	align-items: center;
+	gap: 0.6rem;
+}
+
+.file-button {
+	padding: 0.45rem 0.85rem;
+	border-radius: 8px;
+	border: 1px solid var(--border);
+	background: var(--card-bg);
+	color: var(--fg);
+	font-size: 0.85rem;
+	cursor: pointer;
+	flex-shrink: 0;
+}
+
+.file-input-hidden:focus-visible + .file-button {
+	outline: 2px solid var(--accent);
+	outline-offset: 1px;
+}
+
+.file-name {
+	font-size: 0.85rem;
+	color: var(--muted);
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 #manual-button {
