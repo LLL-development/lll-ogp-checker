@@ -37,16 +37,49 @@
 		<p id="app-description"></p>
 	</header>
 
-	<form id="check-form" class="check-form">
-		<input
-			id="url-input"
-			type="text"
-			inputmode="url"
-			autocomplete="off"
-			required
-		/>
-		<button type="submit" id="check-button"></button>
-	</form>
+	<div class="tabs" role="tablist">
+		<button type="button" class="tab-button active" id="tab-url" role="tab" aria-selected="true"></button>
+		<button type="button" class="tab-button" id="tab-manual" role="tab" aria-selected="false"></button>
+	</div>
+
+	<div id="panel-url" class="tab-panel">
+		<form id="check-form" class="check-form">
+			<input
+				id="url-input"
+				type="text"
+				inputmode="url"
+				autocomplete="off"
+				required
+			/>
+			<button type="submit" id="check-button"></button>
+		</form>
+	</div>
+
+	<div id="panel-manual" class="tab-panel" hidden>
+		<form id="manual-form" class="manual-form">
+			<div class="field">
+				<label for="manual-title" id="manual-title-label"></label>
+				<input id="manual-title" type="text" />
+			</div>
+			<div class="field">
+				<label for="manual-desc" id="manual-desc-label"></label>
+				<textarea id="manual-desc" rows="3"></textarea>
+			</div>
+			<div class="field">
+				<label for="manual-site" id="manual-site-label"></label>
+				<input id="manual-site" type="text" placeholder="example.com" />
+			</div>
+			<div class="field">
+				<label for="manual-image-url" id="manual-image-url-label"></label>
+				<input id="manual-image-url" type="text" placeholder="https://example.com/image.png" />
+			</div>
+			<div class="field">
+				<label for="manual-image-file" id="manual-image-file-label"></label>
+				<input id="manual-image-file" type="file" accept="image/*" />
+			</div>
+			<button type="submit" id="manual-button"></button>
+		</form>
+	</div>
 
 	<p id="error" class="error" hidden></p>
 	<p id="loading" class="loading" hidden></p>

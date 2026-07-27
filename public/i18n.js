@@ -11,6 +11,14 @@ const STRINGS = {
 		emptyRawHint: "No og:/twitter: meta tags found on this page.",
 		themeToggleToDark: "Switch to dark theme",
 		themeToggleToLight: "Switch to light theme",
+		tabUrl: "Check from URL",
+		tabManual: "Check appearance",
+		manualTitleLabel: "Title",
+		manualDescLabel: "Description",
+		manualSiteLabel: "Site name / domain",
+		manualImageUrlLabel: "Image URL",
+		manualImageFileLabel: "or upload an image",
+		manualButton: "Preview",
 		titleWarning: (platform, len, limit, over) =>
 			`Title is ${len} characters — ${platform} will likely cut it off after ~${limit}. Consider shortening by ${over}.`,
 		descWarning: (platform, len, limit, over) =>
@@ -37,6 +45,14 @@ const STRINGS = {
 		emptyRawHint: "og: / twitter: のメタタグが見つかりませんでした。",
 		themeToggleToDark: "ダークテーマに切り替え",
 		themeToggleToLight: "ライトテーマに切り替え",
+		tabUrl: "URLでチェック",
+		tabManual: "表示内容を直接入力",
+		manualTitleLabel: "タイトル",
+		manualDescLabel: "説明文",
+		manualSiteLabel: "サイト名 / ドメイン",
+		manualImageUrlLabel: "画像URL",
+		manualImageFileLabel: "または画像をアップロード",
+		manualButton: "プレビュー",
 		titleWarning: (platform, len, limit, over) =>
 			`タイトルが${len}文字あります。${platform}では約${limit}文字で切り捨てられる可能性があります。${over}文字ほど短くすることをおすすめします。`,
 		descWarning: (platform, len, limit, over) =>
@@ -62,6 +78,14 @@ const STRINGS = {
 		emptyRawHint: "未在此页面上找到 og: / twitter: 元标签。",
 		themeToggleToDark: "切换到深色主题",
 		themeToggleToLight: "切换到浅色主题",
+		tabUrl: "通过网址检查",
+		tabManual: "手动输入检查",
+		manualTitleLabel: "标题",
+		manualDescLabel: "描述",
+		manualSiteLabel: "网站名称 / 域名",
+		manualImageUrlLabel: "图片链接",
+		manualImageFileLabel: "或上传图片",
+		manualButton: "预览",
 		titleWarning: (platform, len, limit, over) =>
 			`标题共 ${len} 个字符 — ${platform} 大约在 ${limit} 个字符后可能会被截断。建议缩短约 ${over} 个字符。`,
 		descWarning: (platform, len, limit, over) =>

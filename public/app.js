@@ -12,6 +12,18 @@ const rawTagsHeadingEl = document.getElementById("raw-tags-heading");
 const langSwitchEl = document.getElementById("lang-switch");
 const themeToggleEl = document.getElementById("theme-toggle");
 
+const tabUrlBtn = document.getElementById("tab-url");
+const tabManualBtn = document.getElementById("tab-manual");
+const panelUrl = document.getElementById("panel-url");
+const panelManual = document.getElementById("panel-manual");
+const manualForm = document.getElementById("manual-form");
+const manualTitle = document.getElementById("manual-title");
+const manualDesc = document.getElementById("manual-desc");
+const manualSite = document.getElementById("manual-site");
+const manualImageUrl = document.getElementById("manual-image-url");
+const manualImageFile = document.getElementById("manual-image-file");
+const manualButton = document.getElementById("manual-button");
+
 const THEME_STORAGE_KEY = "ogp-theme";
 let lastData = null;
 
@@ -273,8 +285,78 @@ function applyStaticText() {
 	for (const btn of langSwitchEl.querySelectorAll("button")) {
 		btn.classList.toggle("active", btn.dataset.lang === I18N.lang);
 	}
+	tabUrlBtn.textContent = I18N.t("tabUrl");
+	tabManualBtn.textContent = I18N.t("tabManual");
+	document.getElementById("manual-title-label").textContent = I18N.t("manualTitleLabel");
+	document.getElementById("manual-desc-label").textContent = I18N.t("manualDescLabel");
+	document.getElementById("manual-site-label").textContent = I18N.t("manualSiteLabel");
+	document.getElementById("manual-image-url-label").textContent = I18N.t("manualImageUrlLabel");
+	document.getElementById("manual-image-file-label").textContent = I18N.t("manualImageFileLabel");
+	manualButton.textContent = I18N.t("manualButton");
 	if (lastData) renderResult(lastData);
 }
+
+function setActiveTab(tab) {
+	const isUrl = tab === "url";
+	tabUrlBtn.classList.toggle("active", isUrl);
+	tabManualBtn.classList.toggle("active", !isUrl);
+	tabUrlBtn.setAttribute("aria-selected", String(isUrl));
+	tabManualBtn.setAttribute("aria-selected", String(!isUrl));
+	panelUrl.hidden = !isUrl;
+	panelManual.hidden = isUrl;
+}
+
+tabUrlBtn.addEventListener("click", () => setActiveTab("url"));
+tabManualBtn.addEventListener("click", () => setActiveTab("manual"));
+
+function readImageFile(file) {
+	return new Promise((resolve, reject) => {
+		const reader = new FileReader();
+		reader.onload = () => resolve(reader.result);
+		reader.onerror = () => reject(reader.error);
+		reader.readAsDataURL(file);
+	});
+}
+
+manualForm.addEventListener("submit", async (event) => {
+	event.preventDefault();
+
+	const title = manualTitle.value.trim();
+	const description = manualDesc.value.trim();
+	const siteInput = manualSite.value.trim();
+	const file = manualImageFile.files[0];
+
+	let image = manualImageUrl.value.trim();
+	if (file) {
+		try {
+			image = await readImageFile(file);
+		} catch {
+			/* fall back to the URL field if the file can't be read */
+		}
+	}
+
+	const site = siteInput || "example.com";
+	const raw = {};
+	if (title) raw["og:title"] = title;
+	if (description) raw["og:description"] = description;
+	if (image) raw["og:image"] = image;
+	if (siteInput) raw["og:site_name"] = siteInput;
+
+	renderResult({
+		requestedUrl: "",
+		finalUrl: /^https?:\/\//i.test(site) ? site : `https://${site}`,
+		title,
+		description,
+		image,
+		siteName: siteInput,
+		favicon: "",
+		twitterCard: "",
+		twitterTitle: "",
+		twitterDescription: "",
+		twitterImage: "",
+		raw,
+	});
+});
 
 function setLang(lang) {
 	I18N.setLang(lang);

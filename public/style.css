@@ -158,11 +158,84 @@ html[data-theme="dark"] .header .logo {
 	max-width: 640px;
 }
 
+.tabs {
+	display: flex;
+	gap: 0.4rem;
+	margin-top: 1.75rem;
+	border-bottom: 1px solid var(--border);
+}
+
+.tab-button {
+	border: none;
+	background: none;
+	color: var(--muted);
+	font-size: 0.9rem;
+	font-weight: 600;
+	padding: 0.6rem 0.2rem;
+	margin-right: 1rem;
+	cursor: pointer;
+	border-bottom: 2px solid transparent;
+}
+
+.tab-button.active {
+	color: var(--fg);
+	border-bottom-color: var(--accent);
+}
+
+.tab-panel {
+	max-width: 640px;
+}
+
 .check-form {
 	display: flex;
 	gap: 0.5rem;
-	margin: 1.75rem 0 1rem;
-	max-width: 640px;
+	margin: 1rem 0 1rem;
+}
+
+.manual-form {
+	display: flex;
+	flex-direction: column;
+	gap: 0.85rem;
+	margin: 1rem 0;
+}
+
+.field {
+	display: flex;
+	flex-direction: column;
+	gap: 0.3rem;
+}
+
+.field label {
+	font-size: 0.8rem;
+	color: var(--muted);
+}
+
+.field input,
+.field textarea {
+	padding: 0.6rem 0.75rem;
+	border-radius: 8px;
+	border: 1px solid var(--border);
+	background: var(--card-bg);
+	color: var(--fg);
+	font-size: 0.95rem;
+	font-family: inherit;
+	resize: vertical;
+}
+
+.field input[type="file"] {
+	padding: 0.35rem 0.5rem;
+}
+
+#manual-button {
+	align-self: flex-start;
+	padding: 0.65rem 1.25rem;
+	border-radius: 8px;
+	border: none;
+	background: var(--accent);
+	color: #fff;
+	font-size: 1rem;
+	font-weight: 600;
+	cursor: pointer;
 }
 
 #url-input {
