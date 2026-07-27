@@ -2,7 +2,7 @@ const USER_AGENT = "Mozilla/5.0 (compatible; OGPChecker/1.0; +https://github.com
 const FETCH_TIMEOUT_MS = 10_000;
 const MAX_BYTES = 2 * 1024 * 1024; // stop reading well before the whole body if <head> never closes
 
-interface PreviewResult {
+export interface PreviewResult {
 	requestedUrl: string;
 	finalUrl: string;
 	title: string;
@@ -17,7 +17,7 @@ interface PreviewResult {
 	raw: Record<string, string>;
 }
 
-class HttpError extends Error {
+export class HttpError extends Error {
 	constructor(
 		public status: number,
 		message: string,
@@ -26,7 +26,7 @@ class HttpError extends Error {
 	}
 }
 
-function isBlockedHost(hostname: string): boolean {
+export function isBlockedHost(hostname: string): boolean {
 	const h = hostname.toLowerCase();
 	if (h === "localhost" || h.endsWith(".local") || h.endsWith(".internal")) return true;
 	const ipv4 = h.match(/^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/);
@@ -49,7 +49,7 @@ function resolveUrl(maybeRelative: string, base: string): string {
 	}
 }
 
-async function extractMeta(targetUrl: string): Promise<PreviewResult> {
+export async function extractMeta(targetUrl: string): Promise<PreviewResult> {
 	const upstream = await fetch(targetUrl, {
 		headers: {
 			"user-agent": USER_AGENT,
@@ -129,47 +129,3 @@ async function extractMeta(targetUrl: string): Promise<PreviewResult> {
 		raw: Object.fromEntries(Object.entries(meta).filter(([k]) => !k.startsWith("__"))),
 	};
 }
-
-async function handlePreview(request: Request): Promise<Response> {
-	const url = new URL(request.url);
-	const target = url.searchParams.get("url");
-	if (!target) {
-		return Response.json({ error: "Missing 'url' query parameter" }, { status: 400 });
-	}
-
-	let parsedTarget: URL;
-	try {
-		parsedTarget = new URL(target);
-	} catch {
-		return Response.json({ error: "Invalid URL" }, { status: 400 });
-	}
-	if (parsedTarget.protocol !== "http:" && parsedTarget.protocol !== "https:") {
-		return Response.json({ error: "Only http/https URLs are supported" }, { status: 400 });
-	}
-	if (isBlockedHost(parsedTarget.hostname)) {
-		return Response.json({ error: "That host cannot be checked" }, { status: 400 });
-	}
-
-	try {
-		const result = await extractMeta(parsedTarget.href);
-		return Response.json(result);
-	} catch (err) {
-		if (err instanceof HttpError) {
-			return Response.json({ error: err.message }, { status: err.status });
-		}
-		if (err instanceof Error && err.name === "TimeoutError") {
-			return Response.json({ error: "Timed out fetching the target page" }, { status: 504 });
-		}
-		return Response.json({ error: "Failed to fetch the target page" }, { status: 502 });
-	}
-}
-
-export default {
-	async fetch(request, env): Promise<Response> {
-		const url = new URL(request.url);
-		if (url.pathname === "/api/preview") {
-			return handlePreview(request);
-		}
-		return env.ASSETS.fetch(request);
-	},
-} satisfies ExportedHandler<Env>;
