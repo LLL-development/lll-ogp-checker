@@ -2,7 +2,7 @@ const STRINGS = {
 	en: {
 		title: "OGP Checker",
 		description:
-			"Preview how a page link will look when shared on Facebook, LinkedIn, LINE, X, WhatsApp, WeChat, Slack, and Discord.",
+			"Preview how a page link will look when shared on Facebook, LinkedIn, LINE, Instagram, X, Threads, WhatsApp, WeChat, Slack, and Discord.",
 		inputPlaceholder: "https://example.com/page",
 		checkButton: "Check",
 		loading: "Fetching page…",
@@ -38,7 +38,7 @@ const STRINGS = {
 	ja: {
 		title: "OGP チェッカー",
 		description:
-			"Facebook、LinkedIn、LINE、X、WhatsApp、WeChat、Slack、Discord でシェアしたときにページのリンクがどう表示されるかをプレビューします。",
+			"Facebook、LinkedIn、LINE、Instagram、X、Threads、WhatsApp、WeChat、Slack、Discord でシェアしたときにページのリンクがどう表示されるかをプレビューします。",
 		inputPlaceholder: "https://example.com/page",
 		checkButton: "チェック",
 		loading: "ページを取得中…",
@@ -73,7 +73,7 @@ const STRINGS = {
 	},
 	zh: {
 		title: "OGP 检查器",
-		description: "预览页面链接分享到 Facebook、LinkedIn、LINE、X、WhatsApp、微信、Slack 和 Discord 时的显示效果。",
+		description: "预览页面链接分享到 Facebook、LinkedIn、LINE、Instagram、X、Threads、WhatsApp、微信、Slack 和 Discord 时的显示效果。",
 		inputPlaceholder: "https://example.com/page",
 		checkButton: "检查",
 		loading: "正在获取页面…",
