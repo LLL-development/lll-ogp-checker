@@ -11,7 +11,7 @@ account required.
 ## Features
 
 - **URL check** — fetches a page server-side and extracts its OGP/Twitter Card metadata (title, description, image, favicon, site name)
-- **Multi-platform preview** — renders accurate link-card mockups for Facebook, LinkedIn, LINE, X (Twitter), WhatsApp, WeChat, Slack, and Discord, each with platform-specific title/description truncation limits
+- **Multi-platform preview** — renders accurate link-card mockups for Facebook, LinkedIn, LINE, Instagram, X (Twitter), Threads, WhatsApp, WeChat, Slack, and Discord, each with platform-specific title/description truncation limits
 - **Manual mode** — enter title, description, site, and image directly (with file upload) to preview a card without an existing live page
 - **Warnings** — flags titles/descriptions that exceed a platform's display limit
 - **Multi-language UI** — English, Japanese, and Simplified Chinese
